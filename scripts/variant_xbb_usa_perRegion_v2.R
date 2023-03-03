@@ -23,7 +23,7 @@ map_hhs_region <- data.frame(
 )
 
 # load raw data
-date_release <- "20230217"
+date_release <- "20230303"
 rawData <- read_csv(file.path("input", paste(sep = "_", date_release, "SARS-CoV-2_Variant_Proportions.csv")))
 
 rawData_bis <- rawData %>% 
@@ -91,3 +91,4 @@ xbb_df %>%
   hc_subtitle(text = paste0(date_subtitle, " | @vaccintrackerqc"), align = "left") %>%
   hc_title(text = "Évolution de la proportion du variant XBB.1.5 (Kraken) aux États-Unis", align = "left") %>%
   hc_credits(text = "source: CDC - Centers for Disease Control and Prevention", enabled = TRUE)
+
