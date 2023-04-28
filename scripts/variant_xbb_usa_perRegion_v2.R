@@ -23,7 +23,7 @@ map_hhs_region <- data.frame(
 )
 
 # load raw data
-date_release <- "20230331"
+date_release <- "20230428"
 rawData <- read_csv(file.path("input", paste(sep = "_", date_release, "SARS-CoV-2_Variant_Proportions.csv")))
 
 rawData_bis <- rawData %>% 
@@ -37,9 +37,14 @@ message("Last published date : ", last_published_date)
 last_df <- rawData_bis %>% 
   dplyr::filter(published_date_ymd == last_published_date)
 
+# choose variant
+last_df %>% pull(variant) %>% unique
+current_variant <- "XBB.1.5"
+# current_variant <- "XBB.1.16"
+
 # get tidy data
 xbb_df <- last_df %>% 
-  dplyr::filter(variant == "XBB.1.5",
+  dplyr::filter(variant == current_variant,
                 usa_or_hhsregion != "USA") %>% 
   mutate(date_tmp = str_split(pattern = " ", week_ending) %>% map(1) %>% unlist,
          date = mdy(date_tmp),
@@ -82,13 +87,12 @@ xbb_df %>%
              footerFormat = "</table>") %>% 
   hc_yAxis(title = list(text = "Proportion (%)"), 
            labels = list(format = "{value} %"),
-           min = 0, max = 100) %>%
+           min = 0) %>%
   hc_xAxis(title = list(text = "Semaine de prélèvement (se terminant le)")) %>% 
   hc_plotOptions(spline = list(lineWidth = 3,
                                marker = list(radius = 0,
                                              symbol = "circle"))) %>% 
   hc_colors(cols_hhs) %>% 
   hc_subtitle(text = paste0(date_subtitle, " | @vaccintrackerqc"), align = "left") %>%
-  hc_title(text = "Évolution de la proportion du variant XBB.1.5 (Kraken) aux États-Unis", align = "left") %>%
+  hc_title(text = paste("Évolution de la proportion du variant", current_variant, "aux États-Unis"), align = "left") %>%
   hc_credits(text = "source: CDC - Centers for Disease Control and Prevention", enabled = TRUE)
-

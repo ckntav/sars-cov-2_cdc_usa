@@ -4,7 +4,7 @@ library(tidyverse)
 library(lubridate)
 
 # load raw data
-date_release <- "20230331"
+date_release <- "20230428"
 rawData <- read_csv(file.path("input", paste(sep = "_", date_release, "SARS-CoV-2_Variant_Proportions.csv")))
 
 colnames(rawData)
@@ -178,3 +178,4 @@ r3 %>%
   hc_colors(cols) %>% 
   hc_subtitle(text = paste0("Région 3 : Delaware, District of Columbia, Maryland, Pennsylvania, Virginia and West Virginia.<br>", date_subtitle, " | @vaccintrackerqc"), align = "left") %>%
   hc_title(text = "Évolution de la proportion des variants du SRAS-CoV-2 | Région 3, États-Unis", align = "left")
+
