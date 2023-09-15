@@ -4,7 +4,7 @@ library(tidyverse)
 library(lubridate)
 
 # load raw data
-date_release <- "20230526"
+date_release <- "20230915"
 rawData <- read_csv(file.path("input", paste(sep = "_", date_release, "SARS-CoV-2_Variant_Proportions.csv")))
 
 colnames(rawData)
@@ -31,7 +31,7 @@ last_df <- rawData_bis %>%
 variants_list <- last_df %>% 
   mutate(date_tmp = str_split(pattern = " ", week_ending) %>% map(1) %>% unlist,
          date = mdy(date_tmp)) %>% 
-  dplyr::filter(date >= ymd("20220901"),
+  dplyr::filter(date >= ymd("20230101"),
                 share >= 0.05) %>% pull(variant) %>% unique
 
 usa_df <- last_df %>% 
@@ -41,7 +41,7 @@ usa_df <- last_df %>%
          date = mdy(date_tmp),
          percent = share*100) %>% 
   dplyr::select(-week_ending, -date_tmp, -share) %>%
-  dplyr::filter(date >= ymd("20220901")) %>% 
+  dplyr::filter(date >= ymd("20230101")) %>% 
   arrange(date)
 
 usa_df %>% 
@@ -178,4 +178,5 @@ r3 %>%
   hc_colors(cols) %>% 
   hc_subtitle(text = paste0("Région 3 : Delaware, District of Columbia, Maryland, Pennsylvania, Virginia and West Virginia.<br>", date_subtitle, " | @vaccintrackerqc"), align = "left") %>%
   hc_title(text = "Évolution de la proportion des variants du SRAS-CoV-2 | Région 3, États-Unis", align = "left")
+
 
