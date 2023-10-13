@@ -4,8 +4,8 @@ library(tidyverse)
 library(lubridate)
 
 # load raw data
-date_release <- "20230929"
-rawData <- read_csv(file.path("input", paste(sep = "_", date_release, "SARS-CoV-2_Variant_Proportions.csv")))
+date_release <- "20231013"
+rawData <- read_csv(file.path("input", paste(sep = "_", "SARS-CoV-2_Variant_Proportions", paste0(date_release, ".csv"))))
 
 colnames(rawData)
 rawData$usa_or_hhsregion %>% unique

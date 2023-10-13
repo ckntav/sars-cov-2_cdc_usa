@@ -23,8 +23,8 @@ map_hhs_region <- data.frame(
 )
 
 # load raw data
-date_release <- "20230929"
-rawData <- read_csv(file.path("input", paste(sep = "_", date_release, "SARS-CoV-2_Variant_Proportions.csv")))
+date_release <- "20231013"
+rawData <- read_csv(file.path("input", paste(sep = "_", "SARS-CoV-2_Variant_Proportions", paste0(date_release, ".csv"))))
 
 rawData_bis <- rawData %>% 
   mutate(published_date_tmp = str_split(pattern = " ", published_date) %>% map(1) %>% unlist,
