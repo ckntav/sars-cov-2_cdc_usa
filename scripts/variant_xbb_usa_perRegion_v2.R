@@ -23,7 +23,7 @@ map_hhs_region <- data.frame(
 )
 
 # load raw data
-date_release <- "20240216"
+date_release <- "20240621"
 rawData <- read_csv(file.path("input", paste(sep = "_", "SARS-CoV-2_Variant_Proportions", paste0(date_release, ".csv"))))
 
 rawData_bis <- rawData %>% 
@@ -39,8 +39,10 @@ last_df <- rawData_bis %>%
 
 # choose variant
 last_df %>% pull(variant) %>% unique
+current_variant <- "KP.3"
+current_variant <- "KP.2"
 current_variant <- "JN.1"
-# current_variant <- "XBB.1.16"
+current_variant <- "XBB.1.16"
 
 # get tidy data
 xbb_df <- last_df %>% 
