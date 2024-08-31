@@ -4,7 +4,7 @@ library(tidyverse)
 library(lubridate)
 
 # load raw data
-date_release <- "20240621"
+date_release <- "20240830"
 rawData <- read_csv(file.path("input", paste(sep = "_", "SARS-CoV-2_Variant_Proportions", paste0(date_release, ".csv"))))
 
 colnames(rawData)
